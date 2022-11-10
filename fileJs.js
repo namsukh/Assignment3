@@ -92,45 +92,56 @@ function equal()
     let num=0;
     let num2=0; 
     let ans=0;
-    const temp = buffer.match(/^[-+]?([0-9]+)[\\.0-9]+[-+*/+][-+]?([0-9]+)[\\.0-9]*$/g);
-    if(temp==null)
+   
+    for(let i=1;i<buffer.length;i++)
     {
-        dsp.innerHTML="Error";
-        return "Error";
-    }
-    for(let i=1;i<=buffer.length;i++)
-    {
-        
+        console.log("buf",buffer[i])
         if(buffer[i].match(/[0-9]/g))
         {
             num=num*10+(parseFloat(buffer[i]));
             console.log(num);
         }
-        else if(buffer[i]=="+"||buffer[i]=='-')
+        else if(buffer[i]=="+"||buffer[i]=="-"||buffer[i]=="*"||buffer[i]=="/")
         {
             op=buffer[i];
            
             num2=num;
             num=0;
             i++;
-           for(;i<buffer.length;)
+            let flag=0;
+           for(;i<buffer.length&&flag==0;)
            {
-                if(buffer[i]=='+'||buffer=='-')
+                if(buffer[i]=='+'||buffer[i]=='-'||buffer[i]=="*"||buffer[i]=="/")
                 {
-                    break;
+                    flag=1;
+                    i=i-2;
                 }
+                else if(buffer[i].match(/[0-9]/g))
                 num=num*10+(parseFloat(buffer[i]));
                 i++;
            }
-           console.log(num);
-           console.log(num2);
+           console.log("sum1",num);
+           console.log("sum2",num2);
            if(op=="+")
            {
             sum=num+num2;
+            num=sum;
+            console.log("wequl",sum)
            }
            else if(op=="-")
            {
             sum=num2-num;
+            num=sum;
+           }
+           else if(op=="*")
+           {
+            sum=num2*num;
+            num=sum;
+           }
+           else if(op=="/")
+           {
+            sum=num2/num;
+            num=sum;
            }
 
         }
