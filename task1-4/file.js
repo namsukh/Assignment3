@@ -1,3 +1,4 @@
+let count=0;
 function findNumberType(){
     let num=document.getElementById("num").value
     num=parseInt(num)
@@ -52,10 +53,13 @@ function fibbnoaci(numm)
 function counter()
 {
     count+=1;
+    console.log(count);
     document.getElementById("result").innerHTML=count;
 }
 function resetCounter()
 {
     count=0;
+    console.log(count);
     document.getElementById("result").innerHTML=count;
+
 }
